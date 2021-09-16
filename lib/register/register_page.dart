@@ -1,18 +1,13 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:hello_world/pokelist/widgets/modal_button.dart';
 
 class RegisterPage extends StatefulWidget {
-  @override
-  _RegisterPageState createState() => _RegisterPageState();
-}
-
-class _RegisterPageState extends State<RegisterPage> {
   static const inputBorder = UnderlineInputBorder(
     borderSide: BorderSide(color: Colors.black),
   );
 
-  InputDecoration inputDeco(String label) {
+  static InputDecoration inputDeco(String label) {
     return InputDecoration(
       labelText: label,
       labelStyle: const TextStyle(
@@ -22,47 +17,108 @@ class _RegisterPageState extends State<RegisterPage> {
       floatingLabelStyle: const TextStyle(color: Colors.black54),
       enabledBorder: inputBorder,
       focusedBorder: inputBorder,
+      alignLabelWithHint: true,
     );
   }
 
   @override
+  State<RegisterPage> createState() => _RegisterPageState();
+
+  @override
+  _RegisterPageState RegisterPageState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  @override
   Widget build(BuildContext context) {
-    return Form(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(children: [
-            const SizedBox(height: 40.0),
-            Row(
-              children: [
-                TextFormField(
-                  decoration: inputDeco('Nome do Pokemon'),
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Form(
+        child: Column(children: [
+          const SizedBox(height: 40.0),
+          const Text(
+            'Crie seu próprio pokémon',
+            style: TextStyle(
+                color: Color(0xFF048ABF),
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold),
+          ),
+          Expanded(child: Container()),
+          Row(
+            children: [
+              Image.asset('assets/images/pokeball.png'),
+              const SizedBox(
+                width: 20.0,
+              ),
+              Flexible(
+                child: TextFormField(
+                  decoration: RegisterPage.inputDeco('Nome do Pokemon'),
                   cursorColor: Colors.black12,
                 ),
-              ],
-            ),
-            DropdownButtonFormField(
-              items: [
-                DropdownMenuItem(
-                  child: Text('oie'),
-                  value: 1,
-                ),
-                DropdownMenuItem(
-                  child: Text('oie'),
-                  value: 2,
-                ),
-              ],
-              onChanged: (value) {},
-              icon: Icon(
-                Icons.expand_more_rounded,
-                size: 40,
-                color: Color(0xFF333333),
               ),
-              decoration: inputDeco('Categoria'),
+            ],
+          ),
+          Row(
+            children: [
+              Flexible(child: RegisterDropDown()),
+              const SizedBox(width: 34.0),
+              Flexible(child: RegisterDropDown()),
+            ],
+          ),
+          const SizedBox(height: 30),
+          RegisterDropDown(),
+          const SizedBox(height: 48.0),
+          TextFormField(
+            maxLines: 3,
+            cursorColor: Colors.black,
+            decoration: const InputDecoration(
+              label: Text(
+                'Descrição',
+                style: TextStyle(color: Colors.black),
+              ),
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(0)),
+                borderSide: BorderSide(color: Colors.black),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(0)),
+                borderSide: BorderSide(color: Colors.black),
+              ),
             ),
-          ]),
-        ),
+          ),
+          Expanded(child: Container()),
+          ModalButton(
+            title: 'Salvar',
+            onTap: () {},
+          )
+        ]),
       ),
+    );
+  }
+}
+
+class RegisterDropDown extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField(
+      items: const [
+        DropdownMenuItem(
+          child: Text('oie'),
+          value: 1,
+        ),
+        DropdownMenuItem(
+          child: Text('oie'),
+          value: 2,
+        ),
+      ],
+      onChanged: (value) {},
+      icon: const Icon(
+        Icons.expand_more_rounded,
+        size: 40,
+        color: Color(0xFF333333),
+      ),
+      decoration: RegisterPage.inputDeco('Categoria'),
     );
   }
 }

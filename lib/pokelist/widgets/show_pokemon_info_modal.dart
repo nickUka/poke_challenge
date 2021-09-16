@@ -10,10 +10,9 @@ void showPokemonInfo(BuildContext ctx, url) {
   showModalBottomSheet(
     context: ctx,
     builder: (_) {
-      return Container(
-        height: 360,
+      return Padding(
         padding: const EdgeInsets.all(24.0),
-        child: Column(
+        child: Wrap(
           children: [
             Row(
               children: [
@@ -67,16 +66,20 @@ void showPokemonInfo(BuildContext ctx, url) {
                 ),
               ],
             ),
-            Expanded(child: Container()),
-            Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper ante ac venenatis consequat. Donec diam dui, aliquam vel velit id, gravida sagittis ex.Suspendisse potenti. Suspendisse cursus, lectus a sodales vulputate.',
-              textAlign: TextAlign.justify,
-              style: modalTextStyle,
-            ),
-            Expanded(child: Container()),
-            ModalButton(
-              title: "Gotta Catch 'Em All",
-              onTap: () {},
+            Column(
+              children: [
+                const SizedBox(height: 24.0),
+                Text(
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper ante ac venenatis consequat. Donec diam dui, aliquam vel velit id, gravida sagittis ex.Suspendisse potenti. Suspendisse cursus, lectus a sodales vulputate.',
+                  textAlign: TextAlign.justify,
+                  style: modalTextStyle,
+                ),
+                const SizedBox(height: 20.0),
+                ModalButton(
+                  title: "Gotta Catch 'Em All",
+                  onTap: () {},
+                ),
+              ],
             ),
           ],
         ),
