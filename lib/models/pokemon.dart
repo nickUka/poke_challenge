@@ -1,6 +1,8 @@
 class Pokemon {
   int? id;
+  String? imgUrl;
   String? name;
+  String? categoryUrl;
   String? category;
   List? abilities;
   List? types;
@@ -17,24 +19,22 @@ class Pokemon {
     this.isFav = false,
   });
 
-  Pokemon.fromJson(Map json1, Map json2) {
-    id = json1['id'];
-    name = json1['name'];
-    category = json2['genera'][7]['genus'];
-    abilities = json1["abilities"].map(
+  Pokemon.fromJson(Map json) {
+    id = json['id'];
+    imgUrl = json['sprites']['other']['official-artwork']['front_default'];
+    name = json['name'];
+    abilities = json["abilities"].map(
       (x) {
         if (x['is_hidden'] == false) {
           return x['ability']['name'];
         }
       },
     ).toList();
-    types = json1["types"]
+    types = json["types"]
         .map(
           (x) => x['type']['name'],
         )
         .toList();
-    description = json2['flavor_text_entries'][6]['flavor_text'];
-    print(description);
     isFav = false;
   }
 

@@ -3,7 +3,6 @@ import 'package:hello_world/models/pokemon.dart';
 import 'package:hello_world/pokedex/pokedex_page.dart';
 import 'package:hello_world/pokelist/pokelist_page.dart';
 import 'package:hello_world/register/register_page.dart';
-import 'package:hello_world/repository.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -21,12 +20,6 @@ class _MyHomePageState extends State<MyHomePage> {
     PokelistPage(),
     RegisterPage(),
   ];
-
-  @override
-  void initState() {
-    super.initState();
-    print(PokemonRepository.fetchPokemon(111).toString());
-  }
 
   void onTapped(int index) {
     Navigator.of(context)
