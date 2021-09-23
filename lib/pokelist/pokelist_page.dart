@@ -14,15 +14,24 @@ class _PokelistPageState extends State<PokelistPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (ctx, i) => PokelistTile(
-        pokemon: 'Pikachu',
-        imgUrl: url,
-        index: i,
-        onTap: () => showPokemonInfo(context, url),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        title: const Text(
+          'POKELISTA',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
-      itemCount: 150,
-      physics: const BouncingScrollPhysics(),
+      body: ListView.builder(
+        itemBuilder: (ctx, i) => PokelistTile(
+          pokemon: 'Pikachu',
+          imgUrl: url,
+          index: i,
+          onTap: () => showPokemonInfo(context, url),
+        ),
+        itemCount: 150,
+        physics: const BouncingScrollPhysics(),
+      ),
     );
   }
 }

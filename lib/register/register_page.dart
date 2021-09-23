@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:hello_world/pokelist/widgets/modal_button.dart';
@@ -31,68 +32,79 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: Form(
-        child: Column(children: [
-          const SizedBox(height: 40.0),
-          const Text(
-            'Crie seu próprio pokémon',
-            style: TextStyle(
-                color: Color(0xFF048ABF),
-                fontSize: 16.0,
-                fontWeight: FontWeight.bold),
-          ),
-          Expanded(child: Container()),
-          Row(
-            children: [
-              Image.asset('assets/images/pokeball.png'),
-              const SizedBox(
-                width: 20.0,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        title: const Text(
+          'CADASTRE SEU POKÉMON',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: SingleChildScrollView(
+          child: Form(
+            child: Column(children: [
+              const SizedBox(height: 40.0),
+              const Text(
+                'Crie seu próprio pokémon',
+                style: TextStyle(
+                    color: Color(0xFF048ABF),
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold),
               ),
-              Flexible(
-                child: TextFormField(
-                  decoration: RegisterPage.inputDeco('Nome do Pokemon'),
-                  cursorColor: Colors.black12,
+              const SizedBox(height: 32.0),
+              Row(
+                children: [
+                  Image.asset('assets/images/pokeball.png'),
+                  const SizedBox(
+                    width: 20.0,
+                  ),
+                  Flexible(
+                    child: TextFormField(
+                      decoration: RegisterPage.inputDeco('Nome do Pokemon'),
+                      cursorColor: Colors.black12,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Flexible(child: RegisterDropDown()),
+                  const SizedBox(width: 34.0),
+                  Flexible(child: RegisterDropDown()),
+                ],
+              ),
+              const SizedBox(height: 30.0),
+              RegisterDropDown(),
+              const SizedBox(height: 48.0),
+              TextFormField(
+                maxLines: 3,
+                cursorColor: Colors.black,
+                decoration: const InputDecoration(
+                  label: Text(
+                    'Descrição',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(0)),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(0)),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
                 ),
               ),
-            ],
+              const SizedBox(height: 49.0),
+              ModalButton(
+                title: 'Salvar',
+                onTap: () {},
+              )
+            ]),
           ),
-          Row(
-            children: [
-              Flexible(child: RegisterDropDown()),
-              const SizedBox(width: 34.0),
-              Flexible(child: RegisterDropDown()),
-            ],
-          ),
-          const SizedBox(height: 30),
-          RegisterDropDown(),
-          const SizedBox(height: 48.0),
-          TextFormField(
-            maxLines: 3,
-            cursorColor: Colors.black,
-            decoration: const InputDecoration(
-              label: Text(
-                'Descrição',
-                style: TextStyle(color: Colors.black),
-              ),
-              floatingLabelBehavior: FloatingLabelBehavior.always,
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(0)),
-                borderSide: BorderSide(color: Colors.black),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(0)),
-                borderSide: BorderSide(color: Colors.black),
-              ),
-            ),
-          ),
-          Expanded(child: Container()),
-          ModalButton(
-            title: 'Salvar',
-            onTap: () {},
-          )
-        ]),
+        ),
       ),
     );
   }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/pokedex/pokedex_page.dart';
-import 'package:hello_world/pokelist/pokelist_page.dart';
-import 'package:hello_world/register/register_page.dart';
+import 'package:hello_world/my_home_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,62 +16,6 @@ class MyApp extends StatelessWidget {
         accentColor: const Color(0xFFF2BE22),
       ),
       home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  final List<Widget> _pages = [
-    PokedexPage(),
-    PokelistPage(),
-    RegisterPage(),
-  ];
-
-  int _selectedIndex = 0;
-
-  void _onTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        title: const Text(
-          'POKEDEX',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
-      body: _pages.elementAt(_selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.black38,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Pokelista',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle),
-            label: 'Cadastrar',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onTapped,
-      ),
     );
   }
 }
