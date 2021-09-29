@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_world/models/pokemon.dart';
 import 'package:hello_world/pokelist/widgets/modal_button.dart';
 
 const modalTextStyle = TextStyle(
@@ -6,7 +7,10 @@ const modalTextStyle = TextStyle(
   fontSize: 12.0,
 );
 
-void showPokemonInfo(BuildContext ctx, url) {
+void showPokemonInfo({
+  required BuildContext ctx,
+  required Pokemon pokemon,
+}) {
   showModalBottomSheet(
     context: ctx,
     builder: (_) {
@@ -17,8 +21,9 @@ void showPokemonInfo(BuildContext ctx, url) {
             Row(
               children: [
                 Image.network(
-                  url,
-                  height: 130.0,
+                  pokemon.imgUrl!,
+                  height: 135,
+                  width: 135,
                 ),
                 const SizedBox(
                   width: 22.0,
@@ -27,7 +32,7 @@ void showPokemonInfo(BuildContext ctx, url) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '#2 Pikachu',
+                      '#${pokemon.id} ${pokemon.name}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18.0,
@@ -36,17 +41,17 @@ void showPokemonInfo(BuildContext ctx, url) {
                     ),
                     const SizedBox(height: 8.0),
                     Text(
-                      'Categoria',
+                      pokemon.category!,
                       style: modalTextStyle,
                     ),
                     const SizedBox(height: 8.0),
                     Text(
-                      'Habilidades',
+                      pokemon.abilities!.join(", "),
                       style: modalTextStyle,
                     ),
                     const SizedBox(height: 8.0),
                     Text(
-                      'Tipo',
+                      pokemon.types!.join(", "),
                       style: modalTextStyle,
                     ),
                   ],
@@ -70,14 +75,16 @@ void showPokemonInfo(BuildContext ctx, url) {
               children: [
                 const SizedBox(height: 24.0),
                 Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec semper ante ac venenatis consequat. Donec diam dui, aliquam vel velit id, gravida sagittis ex.Suspendisse potenti. Suspendisse cursus, lectus a sodales vulputate.',
+                  pokemon.description!,
                   textAlign: TextAlign.justify,
                   style: modalTextStyle,
                 ),
                 const SizedBox(height: 20.0),
                 ModalButton(
                   title: "Gotta Catch 'Em All",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(ctx).pop();
+                  },
                 ),
               ],
             ),

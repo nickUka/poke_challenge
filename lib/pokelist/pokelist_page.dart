@@ -1,17 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hello_world/bloc/pokelist_bloc.dart';
+import 'package:hello_world/bloc/pokelist_state.dart';
+import 'package:hello_world/pokelist/widgets/bottom_loader.dart';
 import 'package:hello_world/pokelist/widgets/pokelist_tile.dart';
 import 'package:hello_world/pokelist/widgets/show_pokemon_info_modal.dart';
 
-class PokelistPage extends StatefulWidget {
-  @override
-  State<PokelistPage> createState() => _PokelistPageState();
-}
-
-class _PokelistPageState extends State<PokelistPage> {
-  final String url =
-      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png';
-
+class PokelistPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,15 +18,29 @@ class _PokelistPageState extends State<PokelistPage> {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
-      body: ListView.builder(
-        itemBuilder: (ctx, i) => PokelistTile(
-          pokemon: 'Pikachu',
-          imgUrl: url,
-          index: i,
-          onTap: () => showPokemonInfo(context, url),
-        ),
-        itemCount: 150,
-        physics: const BouncingScrollPhysics(),
+      body: BlocBuilder<PokelistBloc, PokelistState>(
+        builder: (context, state) {
+          if (state is PokelistLoadingState) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          final pokelist = state.pokeList;
+          return ListView.builder(
+            itemBuilder: (ctx, i) {
+              return i >= pokelist!.length
+                  ? BottomLoader()
+                  : PokelistTile(
+                      pokemon: pokelist[i].name,
+                      imgUrl: pokelist[i].imgUrl,
+                      index: i,
+                      onTap: () =>
+                          showPokemonInfo(ctx: context, pokemon: pokelist[i]),
+                    );
+            },
+            itemCount: state.currentItem != state.maxItems
+                ? pokelist!.length + 1
+                : pokelist!.length,
+          );
+        },
       ),
     );
   }

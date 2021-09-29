@@ -1,16 +1,14 @@
 import 'package:hello_world/models/pokemon.dart';
 import 'package:hello_world/repository.dart';
-import 'package:http/http.dart';
 
 class PokemonService {
   PokemonRepository pokemonRepository;
 
   PokemonService({required this.pokemonRepository});
 
-  Future<List<Pokemon>> fetchPokelist() async {
+  Future<List<Pokemon>> fetchPokelist(int current) async {
     List<Pokemon> pokelist = [];
-    Response response;
-    for (int id = 1; id >= 150; id++) {
+    for (int id = current + 1; id <= current + 15; id++) {
       pokelist.add(await PokemonRepository.fetchPokemon(id));
     }
     return pokelist;

@@ -2,7 +2,6 @@ class Pokemon {
   int? id;
   String? imgUrl;
   String? name;
-  String? categoryUrl;
   String? category;
   List? abilities;
   List? types;
@@ -19,28 +18,30 @@ class Pokemon {
     this.isFav = false,
   });
 
-  Pokemon.fromJson(Map json) {
-    id = json['id'];
-    imgUrl = json['sprites']['other']['official-artwork']['front_default'];
-    name = json['name'];
-    abilities = json["abilities"].map(
-      (x) {
-        if (x['is_hidden'] == false) {
-          return x['ability']['name'];
-        }
+  Pokemon.fromJson(Map jsonPoke, Map jsonSpecies) {
+    List aux = jsonPoke["abilities"].map(
+      (item) {
+        if (item['is_hidden'] == false)
+          return capitalize(item['ability']['name']);
       },
     ).toList();
-    types = json["types"]
-        .map(
-          (x) => x['type']['name'],
-        )
-        .toList();
-    isFav = false;
-  }
+    aux.removeWhere((element) => element == null);
 
-  @override
-  String toString() {
-    // TODO: implement toString
-    return 'Pokemon { id: $id, name: $name,}';
+    this.id = jsonPoke['id'];
+    this.imgUrl =
+        jsonPoke['sprites']['other']['official-artwork']['front_default'];
+    this.name = capitalize(jsonPoke['name']);
+    this.category = capitalize(jsonSpecies['genera'][7]['genus']);
+    this.abilities = aux;
+    this.types = jsonPoke["types"]
+        .map((item) => capitalize(item['type']['name']))
+        .toList();
+    this.description = jsonSpecies["flavor_text_entries"][6]['flavor_text']
+        .replaceAll('\n', ' ');
+    this.isFav = false;
   }
+}
+
+String capitalize(String toCapitalize) {
+  return "${toCapitalize[0].toUpperCase()}${toCapitalize.substring(1)}";
 }

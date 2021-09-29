@@ -13,7 +13,7 @@ class PokelistTile extends StatelessWidget {
   final String? pokemon;
   final String? imgUrl;
   final bool? isFav;
-  final void Function()? onTap;
+  final void Function() onTap;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -34,8 +34,8 @@ class PokelistTile extends StatelessWidget {
                   backgroundColor: const Color(0xFF1AA7D3),
                   child: Image.network(
                     imgUrl!,
-                    width: 42,
-                    height: 42,
+                    width: 40,
+                    height: 40,
                   ),
                 ),
                 const SizedBox(width: 20.0),

@@ -5,16 +5,16 @@ import 'package:http/http.dart' as http;
 
 class PokemonRepository {
   static Future<Pokemon> fetchPokemon(int id) async {
-    final response =
-        await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/$id'));
-    final json = jsonDecode(response.body);
-    return Pokemon.fromJson(json);
-  }
-
-  static Future<Pokemon> fetchPokemonSpecies(int id) async {
-    final response = await http
-        .get(Uri.parse('https://pokeapi.co/api/v2/pokemon-species/$id/'));
-    final json = jsonDecode(response.body);
-    return Pokemon.fromJson(json);
+    try {
+      final responsePokemon =
+          await http.get(Uri.parse('https://pokeapi.co/api/v2/pokemon/$id'));
+      final responseSpecies = await http
+          .get(Uri.parse(jsonDecode(responsePokemon.body)['species']['url']));
+      return Pokemon.fromJson(
+          jsonDecode(responsePokemon.body), jsonDecode(responseSpecies.body));
+    } catch (e) {
+      print(e.toString());
+      throw (e.toString());
+    }
   }
 }
