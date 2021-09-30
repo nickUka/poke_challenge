@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:hello_world/pokedex/widgets/pokedex_card.dart';
+import 'package:hello_world/widgets/pokedex_card.dart';
 
 class PokedexPage extends StatelessWidget {
   static const pokedexTextStyle = TextStyle(

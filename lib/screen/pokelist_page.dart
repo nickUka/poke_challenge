@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hello_world/bloc/pokelist_bloc.dart';
-import 'package:hello_world/bloc/pokelist_state.dart';
-import 'package:hello_world/pokelist/widgets/bottom_loader.dart';
-import 'package:hello_world/pokelist/widgets/pokelist_tile.dart';
-import 'package:hello_world/pokelist/widgets/show_pokemon_info_modal.dart';
+import 'package:hello_world/bloc/pokelist/pokelist_bloc.dart';
+import 'package:hello_world/bloc/pokelist/pokelist_state.dart';
+import 'package:hello_world/widgets/bottom_loader.dart';
+import 'package:hello_world/widgets/pokelist_tile.dart';
+import 'package:hello_world/widgets/show_pokemon_info_modal.dart';
 
 class PokelistPage extends StatelessWidget {
   @override
@@ -22,6 +22,17 @@ class PokelistPage extends StatelessWidget {
         builder: (context, state) {
           if (state is PokelistLoadingState) {
             return const Center(child: CircularProgressIndicator());
+          }
+          if (state is PokelistLoadFailedState) {
+            return (Center(
+              child: Text(
+                (state as PokelistLoadFailedState).message,
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 16.0,
+                ),
+              ),
+            ));
           }
           final pokelist = state.pokeList;
           return ListView.builder(

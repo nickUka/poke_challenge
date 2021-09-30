@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:hello_world/models/pokemon.dart';
 import 'package:http/http.dart' as http;
@@ -12,8 +13,9 @@ class PokemonRepository {
           .get(Uri.parse(jsonDecode(responsePokemon.body)['species']['url']));
       return Pokemon.fromJson(
           jsonDecode(responsePokemon.body), jsonDecode(responseSpecies.body));
+    } on SocketException catch (e) {
+      throw (e);
     } catch (e) {
-      print(e.toString());
       throw (e.toString());
     }
   }

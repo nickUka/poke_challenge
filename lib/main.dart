@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hello_world/bloc/pokelist_bloc.dart';
-import 'package:hello_world/my_home_page.dart';
+import 'package:hello_world/bloc/pokelist/pokelist_bloc.dart';
+import 'package:hello_world/widgets/my_home_page.dart';
 import 'package:hello_world/repository.dart';
 import 'package:hello_world/service.dart';
 

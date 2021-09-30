@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hello_world/models/pokemon.dart';
-import 'package:hello_world/pokedex/pokedex_page.dart';
-import 'package:hello_world/pokelist/pokelist_page.dart';
-import 'package:hello_world/register/register_page.dart';
+import 'package:hello_world/screen/pokedex_page.dart';
+import 'package:hello_world/screen/pokelist_page.dart';
+import 'package:hello_world/screen/register_page.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
