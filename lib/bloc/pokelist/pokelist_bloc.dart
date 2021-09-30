@@ -1,20 +1,19 @@
-import 'dart:io';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hello_world/bloc/pokelist/pokelist_event.dart';
 import 'package:hello_world/bloc/pokelist/pokelist_state.dart';
+import 'package:hello_world/models/repo_exception.dart';
 import 'package:hello_world/service.dart';
 
 class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
   final PokemonService pokemonService;
 
   PokelistBloc({required this.pokemonService}) : super(PokelistLoadingState()) {
-    on<PokelistFirstLoad>((event, emit) => _loadFirstPokelist(emit));
-    on<PokelistLoadMore>((event, emit) => _loadMorePokelist(emit));
+    on<PokelistFirstLoad>((event, emit) => _loadFirstPokelist(event, emit));
+    on<PokelistLoadMore>((event, emit) => _loadMorePokelist(event, emit));
     add(PokelistFirstLoad());
   }
 
-  void _loadFirstPokelist(emit) async {
+  void _loadFirstPokelist(event, emit) async {
     try {
       final pokelistFetched = await pokemonService.fetchPokelist(0);
 
@@ -24,23 +23,17 @@ class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
           currentItem: 15,
         ),
       );
-    } on SocketException catch (e) {
-      emit(
-        PokelistLoadFailedState('Não foi possível carregar a Pokelista. :('),
-        currentItem: state.currentItem,
-        pokelist: state.pokeList,
-      );
-    } catch (e) {
-      emit(PokelistLoadFailedState(
-        e.toString(),
-        currentItem: state.currentItem,
-        pokelist: state.pokeList,
-      ));
+    } on PokeException catch (e) {
+      _emitFailedState(e);
     }
-    _loadAgainPokelist(emit);
+    if (state.pokeList == null) {
+      add(event);
+    } else {
+      add(PokelistLoadMore());
+    }
   }
 
-  void _loadMorePokelist(emit) async {
+  void _loadMorePokelist(event, emit) async {
     if (state.currentItem == state.maxItems) return;
     try {
       final pokelistFetched =
@@ -55,27 +48,19 @@ class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
           currentItem: state.currentItem! + 15,
         ),
       );
-    } on SocketException catch (e) {
-      emit(PokelistLoadFailedState(
-        'Não foi possível carregar a Pokelista. :(',
-        currentItem: state.currentItem,
-        pokelist: state.pokeList,
-      ));
-    } catch (e) {
-      emit(PokelistLoadFailedState(
-        e.toString(),
-        currentItem: state.currentItem,
-        pokelist: state.pokeList,
-      ));
+    } on PokeException catch (e) {
+      _emitFailedState(e);
     }
-    _loadAgainPokelist(emit);
+    add(event);
   }
 
-  void _loadAgainPokelist(emit) {
-    if (state.pokeList == null) {
-      add(PokelistFirstLoad());
-    } else {
-      add(PokelistLoadMore());
+  _emitFailedState(PokeException e) {
+    if (state is! PokelistLoadFailedState) {
+      emit(PokelistLoadFailedState(
+        e.message,
+        currentItem: state.currentItem,
+        pokelist: state.pokeList,
+      ));
     }
   }
 }

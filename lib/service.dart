@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:hello_world/models/pokemon.dart';
+import 'package:hello_world/models/repo_exception.dart';
 import 'package:hello_world/repository.dart';
 
 class PokemonService {
@@ -13,8 +16,8 @@ class PokemonService {
         pokelist.add(await PokemonRepository.fetchPokemon(id));
       }
       return pokelist;
-    } catch (e) {
-      throw (e);
+    } on SocketException catch (e) {
+      throw (PokeException(e));
     }
   }
 }

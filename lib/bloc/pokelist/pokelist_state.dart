@@ -18,11 +18,8 @@ class PokelistLoadFailedState extends PokelistState {
   String message;
   List<Pokemon>? pokelist = [];
   int? currentItem;
-  PokelistLoadFailedState(
-    this.message, {
-    this.pokelist,
-    this.currentItem,
-  }) : super(
+  PokelistLoadFailedState(this.message, {this.pokelist, this.currentItem})
+      : super(
           pokeList: pokelist,
           currentItem: currentItem,
         );
