@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ModalButton extends StatelessWidget {
-  const ModalButton({this.onTap, this.title});
+class PokeButton extends StatelessWidget {
+  const PokeButton({this.onTap, this.title});
 
   final void Function()? onTap;
   final String? title;

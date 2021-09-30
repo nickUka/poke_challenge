@@ -31,7 +31,8 @@ class Pokemon {
     this.imgUrl =
         jsonPoke['sprites']['other']['official-artwork']['front_default'];
     this.name = capitalize(jsonPoke['name']);
-    this.category = capitalize(jsonSpecies['genera'][7]['genus']);
+    this.category = capitalize(jsonSpecies['genera'][7]['genus'])
+        .replaceAll(' Pokémon', '');
     this.abilities = aux;
     this.types = jsonPoke["types"]
         .map((item) => capitalize(item['type']['name']))

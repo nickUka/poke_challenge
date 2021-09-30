@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:hello_world/pokelist/widgets/modal_button.dart';
+import 'package:hello_world/widgets/poke_button.dart';
 
 class RegisterPage extends StatefulWidget {
   static const inputBorder = UnderlineInputBorder(
@@ -98,7 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               const SizedBox(height: 49.0),
-              ModalButton(
+              PokeButton(
                 title: 'Salvar',
                 onTap: () {},
               )
