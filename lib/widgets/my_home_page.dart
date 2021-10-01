@@ -1,56 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/models/pokemon.dart';
-import 'package:hello_world/screen/pokedex_page.dart';
-import 'package:hello_world/screen/pokelist_page.dart';
-import 'package:hello_world/screen/register_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemon_test/bloc/tab/tab_bloc.dart';
+import 'package:pokemon_test/bloc/tab/tab_event.dart';
+import 'package:pokemon_test/screens/pokedex_page.dart';
+import 'package:pokemon_test/screens/pokelist_page.dart';
+import 'package:pokemon_test/screens/register_page.dart';
 
-class MyHomePage extends StatefulWidget {
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int selectedIndex;
-  List<Pokemon> pokemon = [];
-
-  _MyHomePageState({this.selectedIndex = 0});
-
+class MyHomePage extends StatelessWidget {
   final List<Widget> _pages = [
     PokedexPage(),
     PokelistPage(),
     RegisterPage(),
   ];
 
-  void onTapped(int index) {
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => _pages[index]));
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages.elementAt(selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.black38,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+    return BlocBuilder<TabBloc, int>(
+      builder: (context, state) {
+        return Scaffold(
+          body: _pages.elementAt(state),
+          bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Theme.of(context).primaryColor,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.black38,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.list),
+                label: 'Pokelista',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.add_circle),
+                label: 'Cadastrar',
+              ),
+            ],
+            currentIndex: state,
+            onTap: (tab) => context.read<TabBloc>().add(TabUpdate(tab)),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Pokelista',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle),
-            label: 'Cadastrar',
-          ),
-        ],
-        currentIndex: selectedIndex,
-        onTap: onTapped,
-      ),
+        );
+      },
     );
   }
 }

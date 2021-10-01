@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hello_world/bloc/pokelist/pokelist_event.dart';
-import 'package:hello_world/bloc/pokelist/pokelist_state.dart';
-import 'package:hello_world/models/repo_exception.dart';
-import 'package:hello_world/service.dart';
+import 'package:pokemon_test/bloc/pokelist/pokelist_event.dart';
+import 'package:pokemon_test/bloc/pokelist/pokelist_state.dart';
+import 'package:pokemon_test/models/repo_exception.dart';
+import 'package:pokemon_test/service.dart';
 
 class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
   final PokemonService pokemonService;

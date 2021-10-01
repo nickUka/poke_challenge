@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:hello_world/widgets/pokedex_card.dart';
+import 'package:pokemon_test/bloc/tab/tab_bloc.dart';
+import 'package:pokemon_test/bloc/tab/tab_event.dart';
+import 'package:pokemon_test/widgets/pokedex_card.dart';
+import 'package:provider/provider.dart';
 
 class PokedexPage extends StatelessWidget {
   static const pokedexTextStyle = TextStyle(
@@ -44,12 +47,12 @@ class PokedexPage extends StatelessWidget {
                     PokedexCard(
                       title: 'Veja todos os 150 Pokémons',
                       actionDesc: 'Visualizar Pokémons ',
-                      onTap: () {},
+                      onTap: () => context.read<TabBloc>().add(TabUpdate(1)),
                     ),
                     PokedexCard(
                       title: 'Crie já seu próprio Pokémon',
                       actionDesc: 'Cadastrar novo Pokémon',
-                      onTap: () {},
+                      onTap: () => context.read<TabBloc>().add(TabUpdate(2)),
                     )
                   ],
                 ),

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:hello_world/widgets/poke_button.dart';
+import 'package:pokemon_test/widgets/poke_button.dart';
 
 class RegisterPage extends StatefulWidget {
   static const inputBorder = UnderlineInputBorder(

@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:hello_world/models/pokemon.dart';
-import 'package:hello_world/models/repo_exception.dart';
-import 'package:hello_world/repository.dart';
+import 'package:pokemon_test/models/pokemon.dart';
+import 'package:pokemon_test/models/repo_exception.dart';
+import 'package:pokemon_test/repository.dart';
 
 class PokemonService {
   PokemonRepository pokemonRepository;

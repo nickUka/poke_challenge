@@ -1,4 +1,6 @@
-part of 'tab_bloc.dart';
+class TabEvent {}
 
-@immutable
-abstract class TabEvent {}
+class TabUpdate extends TabEvent {
+  int tab;
+  TabUpdate(this.tab);
+}

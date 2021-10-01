@@ -1,5 +1,4 @@
-import 'package:hello_world/bloc/pokelist/pokelist_event.dart';
-import 'package:hello_world/models/pokemon.dart';
+import 'package:pokemon_test/models/pokemon.dart';
 
 class PokelistState {
   List<Pokemon>? pokeList = [];

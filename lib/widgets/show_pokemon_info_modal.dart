@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/models/pokemon.dart';
-import 'package:hello_world/widgets/poke_button.dart';
+import 'package:pokemon_test/models/pokemon.dart';
+import 'package:pokemon_test/widgets/poke_button.dart';
 
 const modalTextStyle = TextStyle(
   color: Colors.white,
@@ -27,6 +27,29 @@ void showPokemonInfo({
                   width: 120.0,
                   height: 120.0,
                   fit: BoxFit.cover,
+                  loadingBuilder: (ctx, child, progress) {
+                    return progress == null
+                        ? child
+                        : Container(
+                            width: 120.0,
+                            height: 120.0,
+                            padding: const EdgeInsets.all(15.0),
+                            child: const CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 5.0,
+                            ),
+                          );
+                  },
+                  errorBuilder: (ctx, child, exception) {
+                    return const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Icon(
+                        Icons.error_outline,
+                        color: Colors.red,
+                        size: 100,
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(
                   width: 20.0,
@@ -81,22 +104,24 @@ void showPokemonInfo({
                 Expanded(child: Container()),
               ],
             ),
-            Column(
-              children: [
-                const SizedBox(height: 24.0),
-                Text(
-                  pokemon.description!,
-                  textAlign: TextAlign.justify,
-                  style: modalTextStyle,
-                ),
-                const SizedBox(height: 20.0),
-                PokeButton(
-                  title: "Gotta Catch 'Em All",
-                  onTap: () {
-                    Navigator.of(ctx).pop();
-                  },
-                ),
-              ],
+            Center(
+              child: Column(
+                children: [
+                  const SizedBox(height: 24.0),
+                  Text(
+                    pokemon.description!,
+                    textAlign: TextAlign.justify,
+                    style: modalTextStyle,
+                  ),
+                  const SizedBox(height: 20.0),
+                  PokeButton(
+                    title: "Gotta Catch 'Em All",
+                    onTap: () {
+                      Navigator.of(ctx).pop();
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),

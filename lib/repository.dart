@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:hello_world/models/pokemon.dart';
 import 'package:http/http.dart' as http;
+import 'package:pokemon_test/models/pokemon.dart';
 
 class PokemonRepository {
   static Future<Pokemon> fetchPokemon(int id) async {

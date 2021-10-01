@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hello_world/bloc/pokelist/pokelist_bloc.dart';
-import 'package:hello_world/bloc/pokelist/pokelist_state.dart';
-import 'package:hello_world/widgets/bottom_loader.dart';
-import 'package:hello_world/widgets/pokelist_tile.dart';
-import 'package:hello_world/widgets/show_pokemon_info_modal.dart';
+import 'package:pokemon_test/bloc/pokelist/pokelist_bloc.dart';
+import 'package:pokemon_test/bloc/pokelist/pokelist_state.dart';
+import 'package:pokemon_test/widgets/bottom_loader.dart';
+import 'package:pokemon_test/widgets/pokelist_tile.dart';
+import 'package:pokemon_test/widgets/show_pokemon_info_modal.dart';
 
 class PokelistPage extends StatelessWidget {
   @override
@@ -18,21 +18,27 @@ class PokelistPage extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
-      body: BlocBuilder<PokelistBloc, PokelistState>(
+      body: BlocConsumer<PokelistBloc, PokelistState>(
+        listener: (context, state) {
+          if (state is PokelistLoadFailedState) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.message)));
+          }
+        },
         builder: (context, state) {
           if (state is PokelistLoadingState) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (state is PokelistLoadFailedState) {
-            return (Center(
+          if (state is PokelistLoadFailedState && state.pokelist == null) {
+            return Center(
               child: Text(
-                (state as PokelistLoadFailedState).message,
+                'Erro!',
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
-                  fontSize: 16.0,
+                  fontSize: 20.0,
                 ),
               ),
-            ));
+            );
           }
           final pokelist = state.pokeList;
           return ListView.builder(

@@ -36,6 +36,23 @@ class PokelistTile extends StatelessWidget {
                     imgUrl!,
                     width: 40,
                     height: 40,
+                    loadingBuilder: (ctx, child, progress) {
+                      return progress == null
+                          ? child
+                          : const Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2.0,
+                              ),
+                            );
+                    },
+                    errorBuilder: (ctx, child, exception) {
+                      return const Icon(
+                        Icons.error_outline,
+                        color: Colors.red,
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(width: 20.0),
