@@ -1,12 +1,12 @@
 import 'package:pokemon_test/models/pokemon.dart';
 
 class PokelistState {
-  List<Pokemon>? pokeList = [];
-  int maxItems = 150;
-  int? currentItem;
+  final List<Pokemon>? pokelist;
+  final int maxItems = 150;
+  final int? currentItem;
 
-  PokelistState({
-    this.pokeList,
+  const PokelistState({
+    this.pokelist,
     this.currentItem,
   });
 }
@@ -14,12 +14,28 @@ class PokelistState {
 class PokelistLoadingState extends PokelistState {}
 
 class PokelistLoadFailedState extends PokelistState {
-  String message;
-  List<Pokemon>? pokelist = [];
-  int? currentItem;
+  final String message;
+  final List<Pokemon>? pokelist;
+  final int? currentItem;
+
   PokelistLoadFailedState(this.message, {this.pokelist, this.currentItem})
       : super(
-          pokeList: pokelist,
+          pokelist: pokelist,
           currentItem: currentItem,
+        );
+}
+
+class PokelistFavState extends PokelistState {
+  final List<Pokemon> favPokelist;
+  final List<Pokemon> originalPokelist;
+  final int currentItem;
+
+  const PokelistFavState(
+      {required this.favPokelist,
+      required this.currentItem,
+      required this.originalPokelist})
+      : super(
+          currentItem: currentItem,
+          pokelist: originalPokelist,
         );
 }

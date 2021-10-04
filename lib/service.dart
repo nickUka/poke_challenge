@@ -17,7 +17,9 @@ class PokemonService {
       }
       return pokelist;
     } on SocketException catch (e) {
-      throw (PokeException(e));
+      throw (PokeException(exception: e));
+    } catch (e) {
+      rethrow;
     }
   }
 }

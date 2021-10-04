@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:pokemon_test/models/pokemon.dart';
 
 class PokelistTile extends StatelessWidget {
   const PokelistTile({
     required this.index,
     required this.pokemon,
-    required this.imgUrl,
     required this.onTap,
-    this.isFav = false,
   });
 
   final int? index;
-  final String? pokemon;
-  final String? imgUrl;
-  final bool? isFav;
+  final Pokemon pokemon;
   final void Function() onTap;
   @override
   Widget build(BuildContext context) {
@@ -33,7 +30,7 @@ class PokelistTile extends StatelessWidget {
                   radius: 24,
                   backgroundColor: const Color(0xFF1AA7D3),
                   child: Image.network(
-                    imgUrl!,
+                    pokemon.imgUrl!,
                     width: 40,
                     height: 40,
                     loadingBuilder: (ctx, child, progress) {
@@ -61,17 +58,17 @@ class PokelistTile extends StatelessWidget {
                   children: [
                     Row(children: [
                       Text(
-                        pokemon!,
+                        pokemon.name!,
                         style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 14.0),
                       ),
                       const SizedBox(width: 4),
-                      if ((index! + 1) % 2 == 0)
+                      if (pokemon.isFav!)
                         const Icon(
                           Icons.star,
                           color: Color(0xFFF2BE22),
                           size: 17.0,
-                        ),
+                        )
                     ]),
                     Text(
                       '#${index! + 1}',

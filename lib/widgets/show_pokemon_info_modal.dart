@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemon_test/bloc/pokelist/pokelist_bloc.dart';
+import 'package:pokemon_test/bloc/pokelist/pokelist_event.dart';
+import 'package:pokemon_test/bloc/pokelist/pokelist_state.dart';
 import 'package:pokemon_test/models/pokemon.dart';
 import 'package:pokemon_test/widgets/poke_button.dart';
 
@@ -76,11 +80,23 @@ void showPokemonInfo({
                             ),
                             flex: 6,
                           ),
-                          const Icon(
-                            Icons.star_rounded,
-                            color: Color(0xFFF2BE22),
-                            size: 29.0,
-                          ),
+                          BlocBuilder<PokelistBloc, PokelistState>(
+                            builder: (context, state) {
+                              return InkWell(
+                                borderRadius: BorderRadius.circular(100.0),
+                                child: Icon(
+                                  pokemon.isFav!
+                                      ? Icons.star_rounded
+                                      : Icons.star_outline_rounded,
+                                  color: const Color(0xFFF2BE22),
+                                  size: 29.0,
+                                ),
+                                onTap: () => context
+                                    .read<PokelistBloc>()
+                                    .add(FavPokemon(id: pokemon.id!)),
+                              );
+                            },
+                          )
                         ],
                       ),
                       const SizedBox(height: 8.0),

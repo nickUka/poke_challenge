@@ -4,7 +4,7 @@ import 'package:pokemon_test/bloc/pokelist/pokelist_bloc.dart';
 import 'package:pokemon_test/bloc/tab/tab_bloc.dart';
 import 'package:pokemon_test/repository.dart';
 import 'package:pokemon_test/service.dart';
-import 'package:pokemon_test/widgets/my_home_page.dart';
+import 'package:pokemon_test/screens/my_home_page.dart';
 
 void main() {
   runApp(MyApp());
