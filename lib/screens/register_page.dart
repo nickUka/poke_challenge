@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:provider/provider.dart';
+import 'package:pokemon_test/bloc/navigation/navigation_bloc.dart';
+import 'package:pokemon_test/bloc/navigation/navigation_event.dart';
 import 'package:pokemon_test/widgets/poke_button.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -38,6 +41,13 @@ class _RegisterPageState extends State<RegisterPage> {
         title: const Text(
           'CADASTRE SEU POKÉMON',
           style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.chevron_left_rounded,
+            size: 35,
+          ),
+          onPressed: () => context.read<NavigationBloc>().add(const Back()),
         ),
       ),
       body: Padding(

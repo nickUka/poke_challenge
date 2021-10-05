@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:pokemon_test/bloc/tab/tab_bloc.dart';
-import 'package:pokemon_test/bloc/tab/tab_event.dart';
+import 'package:pokemon_test/bloc/navigation/navigation_bloc.dart';
+import 'package:pokemon_test/bloc/navigation/navigation_event.dart';
+import 'package:pokemon_test/models/navigation_pages.dart';
 import 'package:pokemon_test/widgets/pokedex_card.dart';
 import 'package:provider/provider.dart';
 
@@ -47,12 +48,16 @@ class PokedexPage extends StatelessWidget {
                     PokedexCard(
                       title: 'Veja todos os 150 Pokémons',
                       actionDesc: 'Visualizar Pokémons ',
-                      onTap: () => context.read<TabBloc>().add(TabUpdate(1)),
+                      onTap: () => context
+                          .read<NavigationBloc>()
+                          .add(GoTo(page: POKELIST)),
                     ),
                     PokedexCard(
                       title: 'Crie já seu próprio Pokémon',
                       actionDesc: 'Cadastrar novo Pokémon',
-                      onTap: () => context.read<TabBloc>().add(TabUpdate(2)),
+                      onTap: () => context
+                          .read<NavigationBloc>()
+                          .add(GoTo(page: REGISTER)),
                     )
                   ],
                 ),

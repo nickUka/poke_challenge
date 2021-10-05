@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemon_test/bloc/navigation/navigation_bloc.dart';
+import 'package:pokemon_test/bloc/navigation/navigation_event.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_bloc.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_event.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_state.dart';
-import 'package:pokemon_test/bloc/tab/tab_bloc.dart';
-import 'package:pokemon_test/bloc/tab/tab_event.dart';
 import 'package:pokemon_test/widgets/bottom_loader.dart';
 import 'package:pokemon_test/widgets/error_dialog.dart';
 import 'package:pokemon_test/widgets/pokelist_tile.dart';
@@ -26,9 +26,7 @@ class PokelistPage extends StatelessWidget {
             Icons.chevron_left_rounded,
             size: 35,
           ),
-          onPressed: () => context.read<TabBloc>().add(
-                TabUpdate(0),
-              ),
+          onPressed: () => context.read<NavigationBloc>().add(const Back()),
         ),
         actions: [
           BlocBuilder<PokelistBloc, PokelistState>(
