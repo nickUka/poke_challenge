@@ -11,6 +11,8 @@ class RegisterPage extends StatefulWidget {
     borderSide: BorderSide(color: Colors.black),
   );
 
+  const RegisterPage({Key? key}) : super(key: key);
+
   static InputDecoration inputDeco(String label) {
     return InputDecoration(
       labelText: label,

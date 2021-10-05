@@ -14,6 +14,8 @@ class PokedexPage extends StatelessWidget {
     color: Color(0xFF048ABF),
   );
 
+  const PokedexPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

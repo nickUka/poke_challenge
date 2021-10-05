@@ -6,12 +6,14 @@ import 'package:pokemon_test/bloc/navigation/navigation_event.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_bloc.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_event.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_state.dart';
-import 'package:pokemon_test/widgets/bottom_loader.dart';
 import 'package:pokemon_test/widgets/error_dialog.dart';
-import 'package:pokemon_test/widgets/pokelist_tile.dart';
-import 'package:pokemon_test/widgets/show_pokemon_info_modal.dart';
+import 'package:pokemon_test/widgets/loading_body.dart';
+import 'package:pokemon_test/widgets/pokelist_list.dart';
+import 'package:pokemon_test/widgets/error_body.dart';
 
 class PokelistPage extends StatelessWidget {
+  const PokelistPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,18 +57,10 @@ class PokelistPage extends StatelessWidget {
         builder: (context, state) {
           final pokelist;
           if (state is PokelistLoadingState) {
-            return const Center(child: CircularProgressIndicator());
+            return const LoadingBody();
           } else if (state is PokelistLoadFailedState &&
               state.pokelist == null) {
-            return Center(
-              child: Text(
-                'Erro!',
-                style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontSize: 20.0,
-                ),
-              ),
-            );
+            return const ErrorBody();
           } else if (state is PokelistFavState) {
             pokelist = state.favPokelist;
           } else {
@@ -80,22 +74,9 @@ class PokelistPage extends StatelessWidget {
                     style: TextStyle(color: Colors.black54),
                   ),
                 )
-              : ListView.builder(
-                  itemBuilder: (ctx, i) {
-                    return i >= pokelist!.length
-                        ? BottomLoader()
-                        : PokelistTile(
-                            index: i,
-                            pokemon: pokelist[i],
-                            onTap: () => showPokemonInfo(
-                                ctx: context, pokemon: pokelist[i]),
-                          );
-                  },
-                  itemCount: (state.currentItem != state.maxItems &&
-                          state is! PokelistFavState &&
-                          state is! PokelistLoadFailedState)
-                      ? pokelist!.length + 1
-                      : pokelist!.length,
+              : PokelistList(
+                  pokelist: pokelist,
+                  state: state,
                 );
         },
       ),

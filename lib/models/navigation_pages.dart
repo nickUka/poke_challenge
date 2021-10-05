@@ -9,8 +9,14 @@ const POKEDEX = 0;
 const POKELIST = 1;
 const REGISTER = 2;
 
-final List<Widget> Pages = [
-  PokedexPage(),
-  PokelistPage(),
-  RegisterPage(),
+const List<Widget> Pages = [
+  PokedexPage(
+    key: Key('POKEDEX'),
+  ),
+  PokelistPage(
+    key: Key('POKELIST'),
+  ),
+  RegisterPage(
+    key: Key('REGISTER'),
+  ),
 ];

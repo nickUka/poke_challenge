@@ -62,7 +62,7 @@ void showPokemonInfo({
                   constraints: BoxConstraints(
                       maxWidth: mediaWidth <= 360
                           ? mediaWidth * .47
-                          : mediaWidth * .54),
+                          : mediaWidth * .52),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
