@@ -21,25 +21,25 @@ class Pokemon {
   Pokemon.fromJson(Map jsonPoke, Map jsonSpecies) {
     List aux = jsonPoke["abilities"].map(
       (item) {
-        if (item['is_hidden'] == false)
+        if (item['is_hidden'] == false) {
           return capitalize(item['ability']['name']);
+        }
       },
     ).toList();
     aux.removeWhere((element) => element == null);
 
-    this.id = jsonPoke['id'];
-    this.imgUrl =
-        jsonPoke['sprites']['other']['official-artwork']['front_default'];
-    this.name = capitalize(jsonPoke['name']);
-    this.category = capitalize(jsonSpecies['genera'][7]['genus'])
+    id = jsonPoke['id'];
+    imgUrl = jsonPoke['sprites']['other']['official-artwork']['front_default'];
+    name = capitalize(jsonPoke['name']);
+    category = capitalize(jsonSpecies['genera'][7]['genus'])
         .replaceAll(' Pokémon', '');
-    this.abilities = aux;
-    this.types = jsonPoke["types"]
+    abilities = aux;
+    types = jsonPoke["types"]
         .map((item) => capitalize(item['type']['name']))
         .toList();
-    this.description = jsonSpecies["flavor_text_entries"][6]['flavor_text']
+    description = jsonSpecies["flavor_text_entries"][6]['flavor_text']
         .replaceAll('\n', ' ');
-    this.isFav = false;
+    isFav = false;
   }
 }
 

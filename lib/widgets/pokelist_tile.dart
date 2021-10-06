@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pokemon_test/models/pokemon.dart';
 
 class PokelistTile extends StatelessWidget {
-  const PokelistTile({
-    required this.index,
-    required this.pokemon,
-    required this.onTap,
-  });
+  const PokelistTile(
+      {required this.index,
+      required this.pokemon,
+      required this.onTap,
+      Key? key})
+      : super(key: key);
 
   final int? index;
   final Pokemon pokemon;

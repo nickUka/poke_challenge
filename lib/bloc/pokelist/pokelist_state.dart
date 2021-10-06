@@ -1,3 +1,5 @@
+// ignore_for_file: annotate_overrides, overridden_fields
+
 import 'package:pokemon_test/models/pokemon.dart';
 
 class PokelistState {

@@ -7,10 +7,12 @@ import 'package:pokemon_test/service.dart';
 import 'package:pokemon_test/screens/my_home_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
           primaryColor: const Color(0xFFD94A4A),
           accentColor: const Color(0xFFF2BE22),
         ),
-        home: MyHomePage(),
+        home: const MyHomePage(),
       ),
     );
   }

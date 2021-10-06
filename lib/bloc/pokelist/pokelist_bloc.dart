@@ -26,9 +26,9 @@ class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
         ),
       );
     } on PokeException catch (e) {
-      _emitFailedState(e);
+      _emitFailedState(e, emit);
     } catch (e) {
-      _emitFailedState(PokeException());
+      _emitFailedState(PokeException(), emit);
     }
 
     if (state.pokelist == null) {
@@ -61,9 +61,9 @@ class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
         ));
       }
     } on PokeException catch (e) {
-      _emitFailedState(e);
+      _emitFailedState(e, emit);
     } catch (e) {
-      _emitFailedState(PokeException());
+      _emitFailedState(PokeException(), emit);
     }
 
     add(event);
@@ -105,7 +105,7 @@ class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
     }
   }
 
-  _emitFailedState(PokeException e) {
+  _emitFailedState(PokeException e, Emitter emit) {
     if (state is! PokelistLoadFailedState) {
       emit(PokelistLoadFailedState(
         e.message,

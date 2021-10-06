@@ -6,6 +6,7 @@ import 'package:pokemon_test/bloc/navigation/navigation_event.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_bloc.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_event.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_state.dart';
+import 'package:pokemon_test/models/pokemon.dart';
 import 'package:pokemon_test/widgets/error_dialog.dart';
 import 'package:pokemon_test/widgets/loading_body.dart';
 import 'package:pokemon_test/widgets/pokelist_list.dart';
@@ -51,11 +52,11 @@ class PokelistPage extends StatelessWidget {
       body: BlocConsumer<PokelistBloc, PokelistState>(
         listener: (context, state) {
           if (state is PokelistLoadFailedState) {
-            ErrorDialog(context, state);
+            errorDialog(context, state);
           }
         },
         builder: (context, state) {
-          final pokelist;
+          final List<Pokemon> pokelist;
           if (state is PokelistLoadingState) {
             return const LoadingBody();
           } else if (state is PokelistLoadFailedState &&
@@ -64,7 +65,7 @@ class PokelistPage extends StatelessWidget {
           } else if (state is PokelistFavState) {
             pokelist = state.favPokelist;
           } else {
-            pokelist = state.pokelist;
+            pokelist = state.pokelist!;
           }
 
           return pokelist.isEmpty

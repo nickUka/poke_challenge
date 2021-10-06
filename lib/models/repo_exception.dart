@@ -1,7 +1,6 @@
 import 'dart:io';
 
 class PokeException implements Exception {
-  String? _message;
   SocketException? exception;
 
   PokeException({this.exception});

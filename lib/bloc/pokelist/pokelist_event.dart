@@ -1,5 +1,3 @@
-import 'package:pokemon_test/models/pokemon.dart';
-
 class PokelistEvent {
   const PokelistEvent();
 }

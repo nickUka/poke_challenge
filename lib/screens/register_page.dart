@@ -6,7 +6,7 @@ import 'package:pokemon_test/bloc/navigation/navigation_bloc.dart';
 import 'package:pokemon_test/bloc/navigation/navigation_event.dart';
 import 'package:pokemon_test/widgets/poke_button.dart';
 
-class RegisterPage extends StatefulWidget {
+class RegisterPage extends StatelessWidget {
   static const inputBorder = UnderlineInputBorder(
     borderSide: BorderSide(color: Colors.black),
   );
@@ -27,14 +27,6 @@ class RegisterPage extends StatefulWidget {
     );
   }
 
-  @override
-  State<RegisterPage> createState() => _RegisterPageState();
-
-  @override
-  _RegisterPageState RegisterPageState() => _RegisterPageState();
-}
-
-class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: SingleChildScrollView(
           child: Form(
             child: Column(children: [
-              const SizedBox(height: 40.0),
+              const SizedBox(height: 16.0),
               const Text(
                 'Crie seu próprio pokémon',
                 style: TextStyle(
@@ -81,13 +73,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 ],
               ),
               Row(
-                children: [
+                children: const [
                   Flexible(child: RegisterDropDown()),
-                  const SizedBox(width: 34.0),
+                  SizedBox(width: 34.0),
                   Flexible(child: RegisterDropDown()),
                 ],
               ),
-              const SizedBox(height: 30.0),
+              const SizedBox(height: 15),
               RegisterDropDown(),
               const SizedBox(height: 48.0),
               TextFormField(
@@ -98,6 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     'Descrição',
                     style: TextStyle(color: Colors.black),
                   ),
+                  contentPadding: EdgeInsets.all(10),
                   floatingLabelBehavior: FloatingLabelBehavior.always,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(0)),
@@ -109,7 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 49.0),
+              const SizedBox(height: 50.0),
               PokeButton(
                 title: 'Salvar',
                 onTap: () {},
@@ -123,6 +116,8 @@ class _RegisterPageState extends State<RegisterPage> {
 }
 
 class RegisterDropDown extends StatelessWidget {
+  const RegisterDropDown({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(

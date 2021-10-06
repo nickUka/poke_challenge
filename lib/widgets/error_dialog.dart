@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_state.dart';
 
-Future<dynamic> ErrorDialog(
+Future<dynamic> errorDialog(
     BuildContext context, PokelistLoadFailedState state) {
   return showDialog(
       context: context,

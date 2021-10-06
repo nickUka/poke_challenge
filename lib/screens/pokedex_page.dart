@@ -27,8 +27,12 @@ class PokedexPage extends StatelessWidget {
         ),
       ),
       body: Stack(
+        fit: StackFit.expand,
         children: [
-          Image.asset('assets/images/background.png'),
+          Image.asset(
+            'assets/images/background.png',
+            fit: BoxFit.cover,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Column(
