@@ -31,7 +31,7 @@ class PokeNavBar extends StatelessWidget {
           label: 'Cadastrar',
         ),
       ],
-      currentIndex: state.currentPage,
+      currentIndex: state.currentPage.index,
       onTap: (tab) => context.read<NavigationBloc>().add(GoTo(page: tab)),
     );
   }

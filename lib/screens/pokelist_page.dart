@@ -6,6 +6,7 @@ import 'package:pokemon_test/bloc/navigation/navigation_event.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_bloc.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_event.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_state.dart';
+import 'package:pokemon_test/models/navigation_pages.dart';
 import 'package:pokemon_test/models/pokemon.dart';
 import 'package:pokemon_test/widgets/error_dialog.dart';
 import 'package:pokemon_test/widgets/loading_body.dart';
@@ -13,7 +14,9 @@ import 'package:pokemon_test/widgets/pokelist_list.dart';
 import 'package:pokemon_test/widgets/error_body.dart';
 
 class PokelistPage extends StatelessWidget {
-  const PokelistPage({Key? key}) : super(key: key);
+  final int index;
+
+  const PokelistPage({required this.index, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

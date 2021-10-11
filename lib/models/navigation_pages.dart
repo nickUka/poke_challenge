@@ -11,12 +11,12 @@ const REGISTER = 2;
 
 const List<Widget> Pages = [
   PokedexPage(
-    key: Key('POKEDEX'),
+    index: POKEDEX,
   ),
   PokelistPage(
-    key: Key('POKELIST'),
+    index: POKELIST,
   ),
   RegisterPage(
-    key: Key('REGISTER'),
+    index: REGISTER,
   ),
 ];

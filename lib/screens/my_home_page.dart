@@ -16,7 +16,10 @@ class MyHomePage extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           body: WillPopScope(
-            child: Pages.elementAt(state.currentPage),
+            child: AnimatedSwitcher(
+              child: state.currentPage,
+              duration: const Duration(milliseconds: 300),
+            ),
             onWillPop: () async {
               if (state.pages.length == 1) {
                 return true;

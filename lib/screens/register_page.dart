@@ -5,6 +5,7 @@ import 'package:pokemon_test/bloc/pokelist/pokelist_bloc.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_event.dart';
 import 'package:pokemon_test/bloc/register_poke/register_poke_bloc.dart';
 import 'package:pokemon_test/bloc/register_poke/register_poke_event.dart';
+import 'package:pokemon_test/models/navigation_pages.dart';
 import 'package:pokemon_test/widgets/register_drop_down.dart';
 import 'package:provider/provider.dart';
 import 'package:pokemon_test/bloc/navigation/navigation_bloc.dart';
@@ -16,7 +17,9 @@ class RegisterPage extends StatelessWidget {
     borderSide: BorderSide(color: Colors.black),
   );
 
-  const RegisterPage({Key? key}) : super(key: key);
+  final int index;
+
+  const RegisterPage({required this.index, Key? key}) : super(key: key);
 
   static InputDecoration inputDeco(String label) {
     return InputDecoration(
