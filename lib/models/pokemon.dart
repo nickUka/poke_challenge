@@ -15,6 +15,7 @@ class Pokemon {
     required this.abilities,
     required this.types,
     required this.description,
+    this.imgUrl,
     this.isFav = false,
   });
 

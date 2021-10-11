@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_test/bloc/navigation/navigation_bloc.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_bloc.dart';
+import 'package:pokemon_test/bloc/register_poke/register_poke_bloc.dart';
 import 'package:pokemon_test/repository.dart';
 import 'package:pokemon_test/service.dart';
 import 'package:pokemon_test/screens/my_home_page.dart';
@@ -24,7 +25,12 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        BlocProvider(create: (context) => NavigationBloc()),
+        BlocProvider(
+          create: (context) => NavigationBloc(),
+        ),
+        BlocProvider(
+          create: (context) => RegisterPokeBloc(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

@@ -21,8 +21,8 @@ class PokelistList extends StatelessWidget {
             : PokelistTile(
                 index: i,
                 pokemon: pokelist[i],
-                onTap: () =>
-                    showPokemonInfo(ctx: context, pokemon: pokelist[i]),
+                onTap: () => showPokemonInfo(
+                    ctx: context, pokemon: pokelist[i], index: i),
               );
       },
       itemCount: (state.currentItem != state.maxItems &&

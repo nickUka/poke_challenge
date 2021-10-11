@@ -4,9 +4,9 @@ abstract class RegisterPokeEvent {
 
 class OnChange extends RegisterPokeEvent {
   final String? name;
-  final int? categoriesValue;
-  final List<int>? typesValue;
-  final List<int>? abilitiesValue;
+  final String? categoriesValue;
+  final String? typesValue;
+  final String? abilitiesValue;
   final String? description;
 
   const OnChange({

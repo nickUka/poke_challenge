@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_event.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_state.dart';
+import 'package:pokemon_test/models/pokemon.dart';
 import 'package:pokemon_test/models/repo_exception.dart';
 import 'package:pokemon_test/service.dart';
 
@@ -12,6 +13,7 @@ class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
     on<PokelistLoadMore>((event, emit) => _loadMorePokelist(event, emit));
     on<FavPokemon>((event, emit) => _toggleFavPokemon(event, emit));
     on<PokelistToggleShowFav>((event, emit) => _loggleShowFavPokelist(emit));
+    on<AddNewPokemon>((event, emit) => _addNewPokemonPokelist(event, emit));
     add(PokelistFirstLoad());
   }
 
@@ -70,10 +72,10 @@ class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
   }
 
   void _toggleFavPokemon(FavPokemon event, emit) {
-    final bool isFav = state.pokelist![event.id - 1].isFav!;
-    state.pokelist![event.id - 1].isFav = !isFav;
-
+    final bool isFav;
     if (state is PokelistFavState) {
+      isFav = (state as PokelistFavState).favPokelist[event.index].isFav!;
+      (state as PokelistFavState).favPokelist[event.index].isFav = !isFav;
       emit(PokelistFavState(
         currentItem: (state as PokelistFavState).currentItem,
         originalPokelist: state.pokelist!,
@@ -81,6 +83,9 @@ class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
             state.pokelist!.where((element) => element.isFav!).toList(),
       ));
     } else {
+      isFav = state.pokelist![event.index].isFav!;
+      state.pokelist![event.index].isFav = !isFav;
+
       emit(PokelistState(
         currentItem: state.currentItem,
         pokelist: state.pokelist,
@@ -103,6 +108,30 @@ class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
             currentItem: (state as PokelistFavState).currentItem),
       );
     }
+  }
+
+  void _addNewPokemonPokelist(AddNewPokemon event, emit) {
+    List ability = [];
+    List type = [];
+
+    ability.add(event.abilities);
+    type.add(event.type);
+
+    Pokemon newPokemon = Pokemon(
+      id: state.maxItems + 1,
+      name: event.name,
+      abilities: ability,
+      category: event.category,
+      types: type,
+      description: event.description,
+      imgUrl: '/',
+    );
+
+    state.pokelist!.add(newPokemon);
+    emit(PokelistState(
+        maxItems: state.maxItems + 1,
+        currentItem: state.currentItem!,
+        pokelist: state.pokelist));
   }
 
   _emitFailedState(PokeException e, Emitter emit) {

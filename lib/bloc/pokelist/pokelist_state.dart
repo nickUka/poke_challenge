@@ -4,12 +4,13 @@ import 'package:pokemon_test/models/pokemon.dart';
 
 class PokelistState {
   final List<Pokemon>? pokelist;
-  final int maxItems = 150;
+  int maxItems = 150;
   final int? currentItem;
 
-  const PokelistState({
+  PokelistState({
     this.pokelist,
     this.currentItem,
+    this.maxItems = 150,
   });
 }
 
@@ -32,7 +33,7 @@ class PokelistFavState extends PokelistState {
   final List<Pokemon> originalPokelist;
   final int currentItem;
 
-  const PokelistFavState(
+  PokelistFavState(
       {required this.favPokelist,
       required this.currentItem,
       required this.originalPokelist})

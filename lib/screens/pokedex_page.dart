@@ -48,24 +48,33 @@ class PokedexPage extends StatelessWidget {
                 const SizedBox(
                   height: 24.0,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    PokedexCard(
-                      title: 'Veja todos os 150 Pokémons',
-                      actionDesc: 'Visualizar Pokémons ',
-                      onTap: () => context
-                          .read<NavigationBloc>()
-                          .add(GoTo(page: POKELIST)),
-                    ),
-                    PokedexCard(
-                      title: 'Crie já seu próprio Pokémon',
-                      actionDesc: 'Cadastrar novo Pokémon',
-                      onTap: () => context
-                          .read<NavigationBloc>()
-                          .add(GoTo(page: REGISTER)),
-                    )
-                  ],
+                IntrinsicHeight(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: PokedexCard(
+                          title: 'Veja todos os 150 Pokémons',
+                          actionDesc: 'Visualizar Pokémons ',
+                          onTap: () => context
+                              .read<NavigationBloc>()
+                              .add(GoTo(page: POKELIST)),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 44,
+                      ),
+                      Expanded(
+                        child: PokedexCard(
+                          title: 'Crie já seu próprio Pokémon',
+                          actionDesc: 'Cadastrar novo Pokémon',
+                          onTap: () => context
+                              .read<NavigationBloc>()
+                              .add(GoTo(page: REGISTER)),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 Expanded(
                   child: Container(),

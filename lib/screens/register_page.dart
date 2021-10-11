@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:pokemon_test/bloc/pokelist/pokelist_bloc.dart';
+import 'package:pokemon_test/bloc/pokelist/pokelist_event.dart';
+import 'package:pokemon_test/bloc/register_poke/register_poke_bloc.dart';
+import 'package:pokemon_test/bloc/register_poke/register_poke_event.dart';
+import 'package:pokemon_test/widgets/register_drop_down.dart';
 import 'package:provider/provider.dart';
 import 'package:pokemon_test/bloc/navigation/navigation_bloc.dart';
 import 'package:pokemon_test/bloc/navigation/navigation_event.dart';
@@ -68,23 +73,51 @@ class RegisterPage extends StatelessWidget {
                     child: TextFormField(
                       decoration: RegisterPage.inputDeco('Nome do Pokemon'),
                       cursorColor: Colors.black12,
+                      onChanged: (value) => context
+                          .read<RegisterPokeBloc>()
+                          .add(OnChange(name: value)),
                     ),
                   ),
                 ],
               ),
               Row(
-                children: const [
-                  Flexible(child: RegisterDropDown()),
-                  SizedBox(width: 34.0),
-                  Flexible(child: RegisterDropDown()),
+                children: [
+                  Flexible(
+                    child: RegisterDropDown(
+                      list: context.read<RegisterPokeBloc>().state.categories!,
+                      placeholder: 'Categoria',
+                      onChanged: (value) => context
+                          .read<RegisterPokeBloc>()
+                          .add(OnChange(categoriesValue: value)),
+                    ),
+                  ),
+                  const SizedBox(width: 34.0),
+                  Flexible(
+                    child: RegisterDropDown(
+                      list: context.read<RegisterPokeBloc>().state.types!,
+                      placeholder: 'Tipos',
+                      onChanged: (value) => context
+                          .read<RegisterPokeBloc>()
+                          .add(OnChange(typesValue: value)),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 15),
-              RegisterDropDown(),
+              RegisterDropDown(
+                list: context.read<RegisterPokeBloc>().state.abilities!,
+                placeholder: 'Habilidades',
+                onChanged: (value) => context
+                    .read<RegisterPokeBloc>()
+                    .add(OnChange(abilitiesValue: value)),
+              ),
               const SizedBox(height: 48.0),
               TextFormField(
                 maxLines: 3,
                 cursorColor: Colors.black,
+                onChanged: (value) => context
+                    .read<RegisterPokeBloc>()
+                    .add(OnChange(description: value)),
                 decoration: const InputDecoration(
                   label: Text(
                     'Descrição',
@@ -105,39 +138,21 @@ class RegisterPage extends StatelessWidget {
               const SizedBox(height: 50.0),
               PokeButton(
                 title: 'Salvar',
-                onTap: () {},
+                onTap: () {
+                  final state = context.read<RegisterPokeBloc>().state;
+                  context.read<PokelistBloc>().add(AddNewPokemon(
+                        name: state.name!,
+                        category: state.categoryValue!,
+                        abilities: state.categoryValue!,
+                        type: state.typeValues!,
+                        description: state.description!,
+                      ));
+                },
               )
             ]),
           ),
         ),
       ),
-    );
-  }
-}
-
-class RegisterDropDown extends StatelessWidget {
-  const RegisterDropDown({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownButtonFormField(
-      items: const [
-        DropdownMenuItem(
-          child: Text('oie'),
-          value: 1,
-        ),
-        DropdownMenuItem(
-          child: Text('oie'),
-          value: 2,
-        ),
-      ],
-      onChanged: (value) {},
-      icon: const Icon(
-        Icons.expand_more_rounded,
-        size: 40,
-        color: Color(0xFF333333),
-      ),
-      decoration: RegisterPage.inputDeco('Categoria'),
     );
   }
 }

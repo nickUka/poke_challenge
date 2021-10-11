@@ -66,7 +66,7 @@ class PokelistTile extends StatelessWidget {
                       const SizedBox(width: 4),
                       if (pokemon.isFav!)
                         const Icon(
-                          Icons.star,
+                          Icons.star_rate_rounded,
                           color: Color(0xFFF2BE22),
                           size: 17.0,
                         )

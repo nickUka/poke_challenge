@@ -3,44 +3,62 @@ import 'dart:io';
 class RegisterPokeState {
   final File? img;
   final String? name;
-  final List<String>? categories;
-  final int? categoryValue;
-  final List<String>? types;
-  final List<int>? typeValues;
-  final List<String>? abilities;
-  final List<int>? abilityValues;
+  List<String>? categories;
+  final String? categoryValue;
+  List<String>? types;
+  final String? typeValues;
+  List<String>? abilities;
+  final String? abilityValues;
   final String? description;
 
-  const RegisterPokeState({
+  RegisterPokeState({
     this.img,
     this.name,
-    this.categories,
     this.categoryValue,
-    this.types,
     this.typeValues,
-    this.abilities,
     this.abilityValues,
     this.description,
-  });
+  })  : abilities = [
+          'Habilidade1',
+          'Habilidade2',
+          'Habilidade3',
+          'Habilidade4',
+          'Habilidade5',
+          'Habilidade6',
+        ],
+        categories = [
+          'Categoria1',
+          'Categoria2',
+          'Categoria3',
+          'Categoria4',
+        ],
+        types = [
+          'Tipo1',
+          'Tipo2',
+          'Tipo3',
+          'Tipo4',
+          'Tipo5',
+          'Tipo6',
+        ];
 
   RegisterPokeState copyWith(
       {File? img,
       String? name,
       List<String>? categories,
-      int? categoryValue,
+      String? categoryValue,
       List<String>? types,
-      List<int>? typeValues,
+      String? typeValues,
       List<String>? abilities,
-      List<int>? abilityValues,
+      String? abilityValues,
       String? description}) {
     return RegisterPokeState(
       img: img ?? this.img,
       name: name ?? this.name,
-      categories: categories ?? this.categories,
+      //categories: categories ?? this.categories,
       categoryValue: categoryValue ?? this.categoryValue,
-      types: types ?? this.types,
+      //types: types ?? this.types,
       typeValues: typeValues ?? this.typeValues,
-      abilities: abilities ?? this.abilities,
+      //abilities: abilities ?? this.abilities,
       abilityValues: abilityValues ?? this.typeValues,
       description: description ?? this.description,
     );

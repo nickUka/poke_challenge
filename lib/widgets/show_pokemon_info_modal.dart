@@ -14,6 +14,7 @@ const modalTextStyle = TextStyle(
 void showPokemonInfo({
   required BuildContext ctx,
   required Pokemon pokemon,
+  required int index,
 }) {
   final mediaWidth = MediaQuery.of(ctx).size.width;
   showModalBottomSheet(
@@ -71,7 +72,7 @@ void showPokemonInfo({
                         children: [
                           Flexible(
                             child: Text(
-                              '#${pokemon.id} ${pokemon.name}',
+                              '#${index + 1} ${pokemon.name}',
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16.0,
@@ -93,7 +94,7 @@ void showPokemonInfo({
                                 ),
                                 onTap: () => context
                                     .read<PokelistBloc>()
-                                    .add(FavPokemon(id: pokemon.id!)),
+                                    .add(FavPokemon(index: index)),
                               );
                             },
                           )
