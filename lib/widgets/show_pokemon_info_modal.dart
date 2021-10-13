@@ -27,34 +27,41 @@ void showPokemonInfo({
           children: [
             Row(
               children: [
-                Image(
-                  image: NetworkImage(pokemon.imgUrl!),
-                  width: 120.0,
-                  height: 120.0,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (ctx, child, progress) {
-                    return progress == null
-                        ? child
-                        : Container(
-                            width: 120.0,
-                            height: 120.0,
-                            padding: const EdgeInsets.all(15.0),
-                            child: const CircularProgressIndicator(
-                              color: Colors.white,
-                              strokeWidth: 5.0,
-                            ),
-                          );
-                  },
-                  errorBuilder: (ctx, child, exception) {
-                    return const Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Icon(
-                        Icons.error_outline,
-                        color: Colors.red,
-                        size: 100,
-                      ),
-                    );
-                  },
+                CircleAvatar(
+                  radius: 60,
+                  backgroundImage:
+                      pokemon.img == null ? null : FileImage(pokemon.img!),
+                  child: pokemon.imgUrl == null
+                      ? null
+                      : Image(
+                          image: NetworkImage(pokemon.imgUrl!),
+                          width: 120.0,
+                          height: 120.0,
+                          fit: BoxFit.cover,
+                          loadingBuilder: (ctx, child, progress) {
+                            return progress == null
+                                ? child
+                                : Container(
+                                    width: 120.0,
+                                    height: 120.0,
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: const CircularProgressIndicator(
+                                      color: Colors.white,
+                                      strokeWidth: 5.0,
+                                    ),
+                                  );
+                          },
+                          errorBuilder: (ctx, child, exception) {
+                            return const Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Icon(
+                                Icons.error_outline,
+                                color: Colors.red,
+                                size: 100,
+                              ),
+                            );
+                          },
+                        ),
                 ),
                 const SizedBox(
                   width: 20.0,

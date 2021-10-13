@@ -1,5 +1,8 @@
+import 'dart:io';
+
 class Pokemon {
   int? id;
+  File? img;
   String? imgUrl;
   String? name;
   String? category;
@@ -15,6 +18,7 @@ class Pokemon {
     required this.abilities,
     required this.types,
     required this.description,
+    this.img,
     this.imgUrl,
     this.isFav = false,
   });

@@ -124,7 +124,7 @@ class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
       category: event.category,
       types: type,
       description: event.description,
-      imgUrl: '/',
+      img: event.image,
     );
 
     state.pokelist!.add(newPokemon);

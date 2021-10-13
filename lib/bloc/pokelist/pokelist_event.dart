@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class PokelistEvent {
   const PokelistEvent();
 }
@@ -14,6 +16,7 @@ class FavPokemon extends PokelistEvent {
 class PokelistToggleShowFav extends PokelistEvent {}
 
 class AddNewPokemon extends PokelistEvent {
+  final File image;
   final String name;
   final String category;
   final String type;
@@ -21,6 +24,7 @@ class AddNewPokemon extends PokelistEvent {
   final String description;
 
   const AddNewPokemon({
+    required this.image,
     required this.name,
     required this.category,
     required this.type,

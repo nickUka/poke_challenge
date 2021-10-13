@@ -25,6 +25,7 @@ class RegisterPokeBloc extends Bloc<RegisterPokeEvent, RegisterPokeState> {
 void _onChangeCamp(
     OnChange event, Emitter emit, RegisterPokeState state) async {
   emit(state.copyWith(
+    img: event.image,
     name: event.name,
     categoryValue: event.categoriesValue,
     abilityValues: event.abilitiesValue,

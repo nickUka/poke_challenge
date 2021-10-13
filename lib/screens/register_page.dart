@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_bloc.dart';
 import 'package:pokemon_test/bloc/pokelist/pokelist_event.dart';
 import 'package:pokemon_test/bloc/register_poke/register_poke_bloc.dart';
 import 'package:pokemon_test/bloc/register_poke/register_poke_event.dart';
+import 'package:pokemon_test/bloc/register_poke/register_poke_state.dart';
 import 'package:pokemon_test/models/navigation_pages.dart';
 import 'package:pokemon_test/widgets/register_drop_down.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +41,14 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
+  Future _pickImage(BuildContext ctx) async {
+    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (image == null) return;
+
+    final imgFile = File(image.path);
+    ctx.read<RegisterPokeBloc>().add(OnChange(image: imgFile));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,11 +67,11 @@ class RegisterPage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: SingleChildScrollView(
           child: Form(
             child: Column(children: [
-              const SizedBox(height: 16.0),
+              const SizedBox(height: 40.0),
               const Text(
                 'Crie seu próprio pokémon',
                 style: TextStyle(
@@ -68,7 +82,33 @@ class RegisterPage extends StatelessWidget {
               const SizedBox(height: 32.0),
               Row(
                 children: [
-                  Image.asset('assets/images/pokeball.png'),
+                  InkWell(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(15),
+                    ),
+                    child: Column(
+                      children: [
+                        BlocBuilder<RegisterPokeBloc, RegisterPokeState>(
+                          builder: (context, state) {
+                            if (state.img == null)
+                              return Image.asset('assets/images/pokeball.png');
+                            return CircleAvatar(
+                              backgroundImage: FileImage(state.img!),
+                              radius: 63,
+                            );
+                          },
+                        ),
+                        const Text(
+                          'Editar',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
+                    ),
+                    onTap: () => _pickImage(context),
+                  ),
                   const SizedBox(
                     width: 20.0,
                   ),
@@ -144,6 +184,7 @@ class RegisterPage extends StatelessWidget {
                 onTap: () {
                   final state = context.read<RegisterPokeBloc>().state;
                   context.read<PokelistBloc>().add(AddNewPokemon(
+                        image: state.img!,
                         name: state.name!,
                         category: state.categoryValue!,
                         abilities: state.categoryValue!,

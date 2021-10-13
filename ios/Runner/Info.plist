@@ -41,5 +41,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To pick pokemon picture</string>
+	<key>NSCameraUsageDescription</key>
+	<string>To take pokemon picture</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To use img pckr</string>
 </dict>
 </plist>
