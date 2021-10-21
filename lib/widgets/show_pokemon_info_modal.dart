@@ -28,6 +28,7 @@ void showPokemonInfo({
             Row(
               children: [
                 CircleAvatar(
+                  backgroundColor: Colors.transparent,
                   radius: 60,
                   backgroundImage:
                       pokemon.img == null ? null : FileImage(pokemon.img!),

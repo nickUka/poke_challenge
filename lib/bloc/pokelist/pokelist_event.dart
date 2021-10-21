@@ -19,15 +19,15 @@ class AddNewPokemon extends PokelistEvent {
   final File image;
   final String name;
   final String category;
-  final String type;
-  final String abilities;
+  final List types;
+  final List abilities;
   final String description;
 
   const AddNewPokemon({
     required this.image,
     required this.name,
     required this.category,
-    required this.type,
+    required this.types,
     required this.abilities,
     required this.description,
   });

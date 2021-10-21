@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon_test/bloc/pokelist/pokelist_state.dart';
 
-Future<dynamic> errorDialog(
-    BuildContext context, PokelistLoadFailedState state) {
+Future<dynamic> errorDialog({
+  required BuildContext context,
+  required String mainMessage,
+  required String message,
+}) {
   return showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: Text(
-            'Ops, algo deu errado :(',
+            mainMessage,
             style: TextStyle(
                 color: Theme.of(context).primaryColor, fontSize: 20.0),
           ),
-          content: Text(state.message),
+          content: Text(message),
           actions: [
             TextButton(
               onPressed: () {

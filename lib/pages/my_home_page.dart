@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_test/bloc/navigation/navigation_bloc.dart';
 import 'package:pokemon_test/bloc/navigation/navigation_state.dart';
 import 'package:pokemon_test/bloc/navigation/navigation_event.dart';
-import 'package:pokemon_test/models/navigation_pages.dart';
 import 'package:pokemon_test/widgets/poke_nav_bar.dart';
 import 'package:provider/provider.dart';
 

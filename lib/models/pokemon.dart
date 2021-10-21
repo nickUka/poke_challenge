@@ -12,16 +12,38 @@ class Pokemon {
   bool? isFav;
 
   Pokemon({
-    required this.id,
-    required this.name,
-    required this.category,
-    required this.abilities,
-    required this.types,
-    required this.description,
+    this.id,
+    this.name,
+    this.category,
+    this.abilities,
+    this.types,
+    this.description,
     this.img,
     this.imgUrl,
     this.isFav = false,
   });
+
+  Pokemon copyWith({
+    int? id,
+    File? img,
+    String? imgUrl,
+    String? name,
+    String? category,
+    List? abilities,
+    List? types,
+    String? description,
+  }){
+    return Pokemon(
+      id: id ?? this.id,
+      img: img ?? this.img,
+      imgUrl: imgUrl ?? this.imgUrl,
+      name: name ?? this.name,
+      category: category ?? this.category,
+      abilities: abilities ?? this.abilities,
+      types: types ?? this.types,
+      description: description ?? this.description,
+    );
+  }
 
   Pokemon.fromJson(Map jsonPoke, Map jsonSpecies) {
     List aux = jsonPoke["abilities"].map(

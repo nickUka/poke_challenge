@@ -55,7 +55,10 @@ class PokelistPage extends StatelessWidget {
       body: BlocConsumer<PokelistBloc, PokelistState>(
         listener: (context, state) {
           if (state is PokelistLoadFailedState) {
-            errorDialog(context, state);
+            errorDialog(
+              context: context,
+              mainMessage: 'Ops, algo deu errado :(',
+              message: state.message,);
           }
         },
         builder: (context, state) {

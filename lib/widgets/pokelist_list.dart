@@ -25,7 +25,7 @@ class PokelistList extends StatelessWidget {
                     ctx: context, pokemon: pokelist[i], index: i),
               );
       },
-      itemCount: (state.currentItem != state.maxItems &&
+      itemCount: (state.currentItem != 150 &&
               state is! PokelistFavState &&
               state is! PokelistLoadFailedState)
           ? pokelist.length + 1

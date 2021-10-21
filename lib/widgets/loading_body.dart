@@ -12,7 +12,7 @@ class LoadingBody extends StatelessWidget {
       child: Center(
           child: CircularProgressIndicator(
         color: Theme.of(context).accentColor,
-        backgroundColor: Colors.black12,
+        backgroundColor: Colors.white,
       )),
     );
   }

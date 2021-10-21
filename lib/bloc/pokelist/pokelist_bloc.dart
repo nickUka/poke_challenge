@@ -111,23 +111,18 @@ class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
   }
 
   void _addNewPokemonPokelist(AddNewPokemon event, emit) {
-    List ability = [];
-    List type = [];
-
-    ability.add(event.abilities);
-    type.add(event.type);
-
     Pokemon newPokemon = Pokemon(
       id: state.maxItems + 1,
       name: event.name,
-      abilities: ability,
+      abilities: event.abilities,
       category: event.category,
-      types: type,
+      types: event.types,
       description: event.description,
       img: event.image,
     );
 
     state.pokelist!.add(newPokemon);
+    
     emit(PokelistState(
         maxItems: state.maxItems + 1,
         currentItem: state.currentItem!,
