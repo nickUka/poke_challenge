@@ -21,9 +21,13 @@ class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
     try {
       final pokelistFetched = await pokemonService.fetchPokelist(0);
 
+      var pokelist = state.pokelist ?? [];
+
+      pokelistFetched.forEach((element) => pokelist.add(element));
+
       emit(
         PokelistState(
-          pokelist: pokelistFetched,
+          pokelist: pokelist,
           currentItem: 15,
         ),
       );
@@ -111,6 +115,8 @@ class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
   }
 
   void _addNewPokemonPokelist(AddNewPokemon event, emit) {
+    List<Pokemon> pokelist= state.pokelist ?? [];
+    
     Pokemon newPokemon = Pokemon(
       id: state.maxItems + 1,
       name: event.name,
@@ -121,12 +127,12 @@ class PokelistBloc extends Bloc<PokelistEvent, PokelistState> {
       img: event.image,
     );
 
-    state.pokelist!.add(newPokemon);
+    pokelist.add(newPokemon);
     
     emit(PokelistState(
         maxItems: state.maxItems + 1,
-        currentItem: state.currentItem!,
-        pokelist: state.pokelist));
+        currentItem: state.currentItem ?? 1,
+        pokelist: pokelist ));
   }
 
   _emitFailedState(PokeException e, Emitter emit) {

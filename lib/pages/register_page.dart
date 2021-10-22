@@ -46,7 +46,7 @@ class RegisterPage extends StatelessWidget {
   }
 
   void _save(BuildContext ctx) {
-    if( ctx.read<RegisterPokeBloc>().state.img == null){
+    if(ctx.read<RegisterPokeBloc>().state.img == null){
       errorDialog(
         context: ctx,
         mainMessage: 'Erro ao inserir pokemon',
